@@ -12,11 +12,16 @@ describe('Store info', function() {
    });
 
    it('Fill Store Info', function(){
-        storeInfo.fillBasicInfo()
-       // storeInfo.fillBankInfo()
-        //storeInfo.fillLocationInfo()
-       // storeInfo.fillCustomerReview()
-        storeInfo.editCustomerReview()
+        storeInfo.visitStoreInfo()
+        // storeInfo.fillBasicInfo()
+        // storeInfo.fillBankInfo()
+        // storeInfo.fillLocationInfo()
+        // storeInfo.fillCustomerReview()
+        // storeInfo.editCustomerReview()
+        // storeInfo.deleteCustomerReivew()
+        // storeInfo.addMenu()
+        storeInfo.deleteMenu()
+
    })
 
     // it('Store Publish or Unpublish', function(){

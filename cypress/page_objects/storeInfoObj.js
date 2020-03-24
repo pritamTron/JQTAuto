@@ -50,9 +50,13 @@ export function checkStoreInList(){
 
 }
 
-export function fillBasicInfo(){
+export function visitStoreInfo(){
     cy.get('.fa-caret-down').click()
     cy.get('[href="/store-info"]').click()
+}
+
+export function fillBasicInfo(){
+    
     cy.get(':nth-child(2) > .title-head > .edit-del > button').then((data)=>{
         data.click()
     }).wait(2000)
@@ -64,25 +68,34 @@ export function fillBasicInfo(){
     const fileInput = '#inputGroupFile01'
     // cy.uploadFile(fileName, fileType, fileInput) 
     cy.fixture(fileName).then(fileContent => {
-    cy.get('#inputGroupFile01').upload({ fileContent, fileName, mimeType: 'image/jpeg' });
-    cy.wait(2000)
-          
+        cy.get('#inputGroupFile01').upload({ fileContent, fileName, mimeType: 'image/jpeg' });
+        cy.wait(2000)      
     });
+
+    //select category
     cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(2) > .col-lg-8 > .form-control').select('1',{ force: true })
     // cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(2) > .col-lg-8 > .form-control').select('5').should('have.value', '5')
-    cy.get(':nth-child(4) > .col-lg-8 > .form-inline > .week > .form-control').clear().type('Monday - Friday')
-    // Cypress.$('.rc-time-picker > .rc-time-picker-input').value = "03:40";
-   
-    cy.then((data)=>{
-        Cypress.$(':nth-child(4) > .col-lg-8 > .form-inline > .basic-section > :nth-child(1) > .rc-time-picker > .rc-time-picker-input')[0].value = "03:45";
-        Cypress.$(':nth-child(4) > .col-lg-8 > .form-inline > .basic-section > :nth-child(3) > .rc-time-picker > .rc-time-picker-input')[0].value = "16:00";
-    }) 
-    cy.get(':nth-child(5) > .col-lg-8 > .form-inline > .week > .form-control').clear().type('Saturday and Sunday')
+    
+    //input URL
+    cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(3) > .col-lg-8 > .form-control').clear().type('https://www.google.com')
+
+    //input business hour
+    cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(4) > .col-lg-8 > .form-control').clear().type('Automated Business hour\n 09:00 AM to 06:00 PM \n Monday to Friday')
+    //input name
     cy.get(':nth-child(2) > form > :nth-child(1) > :nth-child(2) > :nth-child(1) > .col-lg-8 > .form-control').clear().type('Pritam Store Edited Auto')
-    cy.get(':nth-child(2) > form > :nth-child(1) > :nth-child(2) > :nth-child(3) > .col-lg-8 > .form-control').clear().type ('Automated Introduction on of the Store named\n Pritam Store Edited Auto')
-    cy.get(':nth-child(2) > :nth-child(4) > .col-lg-8 > .form-control').clear().type('Lalitpur')
-    cy.get(':nth-child(5) > .col-lg-8 > .form-control').clear().type('Jwagal, Kupondol')
-    //cy.get('.col-lg-8 > .btn-primary').click().wait(5000)
+    
+    //input phone number
+    cy.get('#phone').clear().type('9849809797')
+
+    //input introduction
+    cy.get(':nth-child(2) > :nth-child(4) > .col-lg-8 > .form-control').clear().type ('Automated Introduction on of the Store named\n Pritam Store Edited Auto')
+    
+    //input city
+    cy.get(':nth-child(2) > :nth-child(5) > .col-lg-8 > .form-control').clear().type('Lalitpur')
+
+    //input address
+    cy.get(':nth-child(6) > .col-lg-8 > .form-control').clear().type('Jwagal, Kupondol')
+    cy.get('.col-lg-8 > .btn-primary').click().wait(5000)
     
 }
 
@@ -144,6 +157,43 @@ export function deleteCustomerReivew(){
         var getcount=data[0].children.length 
     cy.get('#root > div > div:nth-child(5) > div.row > div > div:nth-child('+getcount+') > div > button.btn.btn-primary.mb-1.mr-3').click()
 })
+}
+
+export function addMenu(){
+    cy.wait(3000)
+    //click add new button
+    cy.get('.title-head > .btn').click()
+
+    //input menu title
+    cy.get('#title').type('Automated title')
+
+    //input price
+    cy.get('#price').clear().type('100',{force:true})
+    // $("body > div:nth-child(7) > div > div.modal.fade.show > div > div > form > div.modal-body > div:nth-child(2) > input").value=5
+    // cy.get('body > div:nth-child(7) > div > div.modal.fade.show > div > div > form > div.modal-body > div:nth-child(2) > input').then((data)=> {
+    //     data.value=5
+    //     
+    // })
+
+    // upload image
+    const fileName = 'test.png'
+    cy.log(mimi.lookup(fileName))   
+    const fileType = mimi.lookup(fileName)
+    cy.log(fileType)
+    const fileInput = '#image'
+    // cy.uploadFile(fileName, fileType, fileInput) 
+    cy.fixture(fileName).then(fileContent => {
+        cy.get(fileInput).upload({ fileContent, fileName, mimeType: fileType });
+        cy.wait(2000)      
+    });
+
+    //click save button
+    cy.get('.modal-footer > .btn-primary').click()
+}
+
+export function deleteMenu(){
+    cy.wait(2000)
+    cy.get(':nth-child(1) > .td-action > .edit-del > .del-part').click()
 }
 
 
