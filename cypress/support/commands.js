@@ -61,7 +61,7 @@ Cypress.Commands.add("login", function(username,password){
 Cypress.Commands.add('CMSLogin',()=>{
     cy.visit('https://dev-admin.jqt01.com')
     cy.get('#user-Username').type('admin')
-    cy.get('#user-CurrentPassword').type('123Admin@')
+    cy.get('#user-CurrentPassword').type('123dmin@')
     cy.get('.btn').click()
     .url()
     .should('contain','/system')
@@ -72,3 +72,22 @@ Cypress.Commands.add('CMSLogin',()=>{
 //     cy.visit('https://dev-admin.jqt01.com')
 //     cy.get
 // })
+
+Cypress.Commands.add('uploadFile', (fixtureFileName, inputSelector, mimeType = '') => {
+    return cy.get(inputSelector).then(subject => {
+        return cy.fixture(fixtureFileName, 'base64')
+            .then(Cypress.Blob.base64StringToBlob)
+            .then(blob => {
+                const el = subject[0];
+                const nameSegments = fixtureFileName.split('/');
+                const name = nameSegments[nameSegments.length - 1];
+                const testFile = new File([blob], name, { type: mimeType });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(testFile);
+                el.files = dataTransfer.files;
+                el.dispatchEvent(new Event('change'));
+                return subject;
+            })
+            .then(_ => cy.wait(1000));
+    });
+});

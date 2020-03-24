@@ -11,25 +11,34 @@ describe('Store info', function() {
        cy.fixture('publishStatus.json').as('publishStatus')
    });
 
-    it('Store Publish or Unpublish', function(){
-       // storeInfo.loginCheck()
-       //cy.login('hyper15@mailinator.com','123Admin@')
-       cy.log('hum idar hay')
-       storeInfo.PublishInfoToggle()
-       if(this.publishStatus.publishSts == "publish"){
-            cy.log('status publish cha')
-            storeInfo.unpublishStore()
-            cy.log('status aba unpublish vayo')
-        }
-        else if(this.publishStatus.publishSts == "unpublish"){
-            cy.log('status unpublish cha.')
-            storeInfo.publishStore()
-            cy.log('status aba publish vayo')
-        }
-        else{
-            cy.log('Publish Status did not matched.')
-        }
-    });
+   it('Fill Store Info', function(){
+        storeInfo.fillBasicInfo()
+       // storeInfo.fillBankInfo()
+        //storeInfo.fillLocationInfo()
+       // storeInfo.fillCustomerReview()
+        storeInfo.editCustomerReview()
+   })
+
+    // it('Store Publish or Unpublish', function(){
+    //    // storeInfo.loginCheck()
+    //    //cy.login('hyper15@mailinator.com','123Admin@')
+    //    cy.log('hum idar hay')
+    //    storeInfo.PublishInfoToggle()
+    //    if(this.publishStatus.publishSts == "publish"){
+    //         cy.log('status publish cha')
+    //         storeInfo.unpublishStore()
+    //         cy.log('status aba unpublish vayo')
+    //     }
+    //     else if(this.publishStatus.publishSts == "unpublish"){
+    //         cy.log('status unpublish cha.')
+    //         storeInfo.publishStore()
+    //         cy.log('status aba publish vayo')
+    //     }
+    //     else{
+    //         cy.log('Publish Status did not matched.')
+    //     }
+    // });
+    
     // it('Change Publish Status', function(){
     //     if(this.publishStatus.publishSts == "publish"){
     //         cy.log('status publish cha')
