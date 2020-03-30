@@ -61,7 +61,7 @@ Cypress.Commands.add("login", function(username,password){
 Cypress.Commands.add('CMSLogin',()=>{
     cy.visit('https://dev-admin.jqt01.com')
     cy.get('#user-Username').type('admin')
-    cy.get('#user-CurrentPassword').type('123dmin@')
+    cy.get('#user-CurrentPassword').type('123Admin@')
     cy.get('.btn').click()
     .url()
     .should('contain','/system')

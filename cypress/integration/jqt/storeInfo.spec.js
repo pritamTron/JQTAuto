@@ -2,18 +2,20 @@ import * as storeInfo from '../../page_objects/storeInfoObj'
 
 describe('Store info', function() {
 
-    before(function() {
-        cy.wait(2000)
-        cy.Storelogin('hyper15@mailinator.com','123Admin@')
-   });
+//     before(function() {
+//         cy.wait(2000)
+//         cy.Storelogin('hyper15@mailinator.com','123Admin@')
+//    });
 
    beforeEach(() => {
-       cy.fixture('publishStatus.json').as('publishStatus')
+        cy.Storelogin('hyper15@mailinator.com','123Admin@')
+        storeInfo.visitStoreInfo()
+        // cy.fixture('publishStatus.json').as('publishStatus')
    });
 
    it('Fill Store Info', function(){
-        storeInfo.visitStoreInfo()
-        // storeInfo.fillBasicInfo()
+        // storeInfo.visitStoreInfo()
+        storeInfo.fillBasicInfo()
         // storeInfo.fillBankInfo()
         // storeInfo.fillLocationInfo()
         // storeInfo.fillCustomerReview()
@@ -23,6 +25,23 @@ describe('Store info', function() {
         storeInfo.deleteMenu()
 
    })
+   it('Fill Bank Info', () => {
+       storeInfo.fillBankInfo()
+   });
+   
+   it('Fill Location',() => {
+        storeInfo.fillLocationInfo()
+   })
+
+   it('Fill Customer Reviwe', () => {
+       storeInfo.fillCustomerReview()
+       storeInfo.editCustomerReview()
+       storeInfo.deleteCustomerReivew()
+   });
+
+   it('Add menu', () => {
+       storeInfo.addMenu()         
+   });
 
     // it('Store Publish or Unpublish', function(){
     //    // storeInfo.loginCheck()

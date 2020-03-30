@@ -77,7 +77,7 @@ export function fillBasicInfo(){
     // cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(2) > .col-lg-8 > .form-control').select('5').should('have.value', '5')
     
     //input URL
-    cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(3) > .col-lg-8 > .form-control').clear().type('https://www.google.com')
+    cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(3) > .col-lg-8 > .form-control').wait(2000).clear().type('https://www.google.com')
 
     //input business hour
     cy.get(':nth-child(2) > form > :nth-child(1) > .join-add > :nth-child(4) > .col-lg-8 > .form-control').clear().type('Automated Business hour\n 09:00 AM to 06:00 PM \n Monday to Friday')
@@ -107,7 +107,7 @@ export function fillBankInfo(){
     cy.get('.join-add > :nth-child(1) > .col-lg-8 > .form-control').clear().type('My Bank automated')
     cy.get(':nth-child(3) > form > :nth-child(1) > .join-add > :nth-child(2) > .col-lg-8 > .form-control').clear().type('Jwagal')
     cy.get('input[name="account_type"]').clear().type('Saving')
-    cy.get('.join-add > :nth-child(4) > .col-lg-8 > .form-control').clear().type('0111000111000').wait(1000)
+    cy.get('#root > div > div:nth-child(3) > form > div > div.col-lg-6.join-add > div:nth-child(4) > div > input').clear().type('0111000111000').wait(1000)
     cy.get('input[name="account_holder_name"]').clear().type('Pritam Shakya 123')
     cy.get('input[name="bank_address"]').clear().type('Jwagal')
     cy.get('input[name="swift_code"]').clear().type('Swift code automated')
